@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tactical dark navy / charcoal */
+    --background: 222 35% 7%;
+    --foreground: 210 30% 92%;
+
+    --card: 222 30% 11%;
+    --card-foreground: 210 30% 92%;
+
+    --popover: 222 30% 10%;
+    --popover-foreground: 210 30% 92%;
+
+    --primary: 38 95% 55%;
+    --primary-foreground: 222 35% 7%;
+    --primary-glow: 38 100% 65%;
+
+    --secondary: 222 25% 16%;
+    --secondary-foreground: 210 25% 85%;
+
+    --muted: 222 22% 14%;
+    --muted-foreground: 215 16% 60%;
+
+    --accent: 38 90% 50%;
+    --accent-foreground: 222 35% 7%;
+
+    --destructive: 0 78% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 38 95% 55%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 222 35% 6%;
+    --sidebar-foreground: 210 25% 82%;
+    --sidebar-primary: 38 95% 55%;
+    --sidebar-primary-foreground: 222 35% 7%;
+    --sidebar-accent: 222 25% 12%;
+    --sidebar-accent-foreground: 210 25% 85%;
+    --sidebar-border: 220 20% 16%;
+    --sidebar-ring: 38 95% 55%;
+
+    --success: 142 65% 48%;
+    --success-foreground: 142 60% 95%;
+    --warning: 38 95% 55%;
+    --warning-foreground: 38 92% 10%;
+    --danger: 0 78% 58%;
+    --danger-foreground: 0 0% 100%;
+    --info: 195 85% 55%;
+    --info-foreground: 200 80% 95%;
+
+    --map-bg: 222 35% 6%;
+
+    /* Gradients & shadows */
+    --gradient-tactical: linear-gradient(135deg, hsl(222 40% 9%) 0%, hsl(222 30% 12%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(38 95% 55% / 0.08), transparent 60%);
+    --shadow-glow: 0 0 24px hsl(38 95% 55% / 0.25);
+    --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px hsl(220 20% 22% / 0.6);
+
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Rajdhani', sans-serif;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body, #root { @apply h-full; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(38 95% 55% / 0.07), transparent),
+      linear-gradient(hsl(var(--background)), hsl(var(--background)));
+  }
+  code, .font-mono { font-family: var(--font-mono); }
+  .font-display { font-family: var(--font-display); letter-spacing: 0.04em; }
+}
+
+@layer utilities {
+  /* Tactical grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(220 20% 20% / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(220 20% 20% / 0.35) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .bg-grid-fade {
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 80%);
+  }
+
+  /* Glassmorphism panel */
+  .glass {
+    background: hsl(222 30% 11% / 0.72);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid hsl(220 20% 22% / 0.7);
+  }
+  .glass-strong {
+    background: hsl(222 35% 9% / 0.88);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid hsl(220 20% 24% / 0.8);
+  }
+
+  .ring-glow { box-shadow: 0 0 0 1px hsl(var(--primary) / 0.4), 0 0 24px hsl(var(--primary) / 0.25); }
+  .text-glow { text-shadow: 0 0 12px hsl(var(--primary) / 0.6); }
+
+  /* Scrollbar */
+  .scrollbar-tactical::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-tactical::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-tactical::-webkit-scrollbar-thumb { background: hsl(220 20% 22%); border-radius: 3px; }
+  .scrollbar-tactical::-webkit-scrollbar-thumb:hover { background: hsl(220 20% 30%); }
+}
+
+/* Marker pulse (used by Leaflet divIcons) */
+@keyframes marker-pulse-ring {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.marker-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid currentColor;
+  animation: marker-pulse-ring 2s ease-out infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker 60s linear infinite; }
+
+/* Leaflet overrides (dark tactical) */
+.leaflet-container {
+  background: hsl(var(--map-bg)) !important;
+  font-family: var(--font-sans);
+}
+.leaflet-popup-content-wrapper,
+.dark-popup .leaflet-popup-content-wrapper {
+  background: hsl(222 35% 8%) !important;
+  color: hsl(210 30% 92%) !important;
+  border: 1px solid hsl(220 20% 22%) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px hsl(38 95% 55% / 0.15) !important;
+}
+.leaflet-popup-tip,
+.dark-popup .leaflet-popup-tip {
+  background: hsl(222 35% 8%) !important;
+  border: 1px solid hsl(220 20% 22%) !important;
+}
+.leaflet-popup-close-button,
+.dark-popup .leaflet-popup-close-button {
+  color: hsl(210 25% 65%) !important;
+}
+.leaflet-control-zoom a {
+  background: hsl(222 30% 11%) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(220 20% 22%) !important;
+}
+.leaflet-control-zoom a:hover { background: hsl(222 30% 16%) !important; }
+.leaflet-control-attribution {
+  background: hsl(222 35% 8% / 0.85) !important;
+  color: hsl(var(--muted-foreground)) !important;
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a { color: hsl(var(--primary)) !important; }
+
+/* Tactical marker icon */
+.tactical-marker {
+  background: transparent !important;
+  border: none !important;
+}
+.tactical-marker-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 0 0 1px currentColor, 0 4px 14px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.tactical-marker:hover .tactical-marker-inner { transform: scale(1.15); }
+.tactical-marker-inner svg { width: 55%; height: 55%; color: white; }
+.tactical-marker-inner img { width: 70%; height: 70%; object-fit: contain; filter: brightness(0) invert(1); }
+.tactical-marker-inner img.marker-img-drone { width: 105%; height: 105%; }
+
+/* Supercluster cluster bubbles */
+.tactical-cluster-wrap { background: transparent !important; border: none !important; }
+.tactical-cluster {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 700;
+  color: hsl(var(--background));
+  background: hsl(var(--primary) / 0.92);
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.5), 0 6px 18px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.tactical-cluster:hover { transform: scale(1.08); }
+.tactical-cluster[data-bucket="s"] { font-size: 12px; }
+.tactical-cluster[data-bucket="m"] { font-size: 13px; background: hsl(38 92% 50% / 0.92); box-shadow: 0 0 0 2px hsl(38 92% 50% / 0.5), 0 6px 18px rgba(0,0,0,0.5); }
+.tactical-cluster[data-bucket="l"] { font-size: 14px; background: hsl(20 90% 55% / 0.95); box-shadow: 0 0 0 2px hsl(20 90% 55% / 0.5), 0 6px 18px rgba(0,0,0,0.5); }
+.tactical-cluster[data-bucket="xl"] { font-size: 15px; background: hsl(0 80% 55% / 0.95); box-shadow: 0 0 0 2px hsl(0 80% 55% / 0.5), 0 6px 22px rgba(0,0,0,0.6); }
