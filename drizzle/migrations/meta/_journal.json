@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1788142064887,
+      "tag": "0000_add_economic_attack_event_type",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788312424596,
+      "tag": "0001_add_grenade_attack_event_type",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788396304002,
+      "tag": "0002_add_economic_damage",
+      "breakpoints": true
+    }
+  ]
+}
