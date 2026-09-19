@@ -1,0 +1,14 @@
+# Pakistani Casualty Tracker
+
+> OSINT dashboard tracking Pakistani security force casualties (killed and wounded in action) and insurgency-related incidents across Pakistan in real time.
+
+The platform aggregates open-source intelligence to map military, paramilitary, and police casualties from insurgent attacks across Pakistan. Data is verified against multiple sources and visualized via tactical dashboards, registries, and analytics.
+
+## Pages
+
+- [Live Map](/): Tactical map of incidents with filters, live feed, and intel panel.
+- [Incidents](/incidents): Searchable registry of all logged insurgency incidents.
+- [KIA Registry](/kia): Individual records of security personnel killed in action.
+- [Analytics](/analytics): Charts of casualties by force branch, province, hometown, and event type.
+- [Blog](/blog): Analysis posts and situation reports.
+- [About](/about): Methodology, sources, and disclaimer.
