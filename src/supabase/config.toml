@@ -1,0 +1,30 @@
+project_id = "REPLACE_WITH_YOUR_PROJECT_ID"
+
+[functions.extract-incident]
+verify_jwt = false
+
+[functions.geocode-location]
+verify_jwt = false
+
+[functions.extract-kia]
+verify_jwt = false
+
+[functions.ingest-telegram]
+verify_jwt = false
+
+[functions.extract-osint]
+verify_jwt = false
+
+[functions.dedupe-osint]
+verify_jwt = false
+
+[functions.preprocess-raw]
+verify_jwt = false
+
+[functions.correlate-incident]
+verify_jwt = false
+[functions.submit-review]
+verify_jwt = true
+
+[functions.manual-extract]
+verify_jwt = true
